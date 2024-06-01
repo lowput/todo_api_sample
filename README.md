@@ -1,24 +1,74 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Rails API sample
 
-Things you may want to cover:
+## build and start (develop)
 
-* Ruby version
+```sh
+docker-compose up -d
+```
 
-* System dependencies
+You can access the API server to `http://localhost:3000`
 
-* Configuration
+## Endpoints
 
-* Database creation
+### 1. Get All Tasks
 
-* Database initialization
+- **URL:** `/api/todos`
+- **Method:** GET
+- **Description:** Todo list
+- **Response:**
+  - **Status Code:** 200 OK
+  - **Body:**
+    ```json
+    [
+    	{
+        "id": 2,
+        "content": "Task 2",
+        "completed": false,
+        "deadline": "2024-01-01T00:00:00.000+09:00",
+        "created_at": "2024-01-01T00:00:00.000+09:00",
+        "updated_at": "2024-01-01T00:00:00.000+09:00"
+	    },
+      {
+        "id": 1,
+        "content": "Task 1",
+        "completed": false,
+        "deadline": "2024-01-01T00:00:00.000+09:00",
+        "created_at": "2024-01-01T00:00:00.000+09:00",
+        "updated_at": "2024-01-01T00:00:00.000+09:00"
+      }
+    ]
+    ```
 
-* How to run the test suite
+### 2. Create a Task
 
-* Services (job queues, cache servers, search engines, etc.)
+- **URL:** `/api/todos`
+- **Method:** POST
+- **Description:** Create a new task.
+- **Request Body:**
+  ```json
+  {
+  "todo": {
+      "content": "new Task",
+      "completed": false,
+      "deadline": "2024-01-1T00:00:00Z"
+    }
+  }
+  ```
 
-* Deployment instructions
+### 3. Update a Task
 
-* ...
+- **URL:** `/api/todos/:id`
+- **Method:** PUT
+- **Description:** Update task.
+- **Request Body:**
+  ```json
+  {
+  "todo": {
+      "content": "Task 1",
+      "completed": true,
+      "deadline": "2024-01-1T00:00:00Z"
+    }
+  }
+  ```
