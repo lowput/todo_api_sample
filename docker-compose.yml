@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    entrypoint: ./entrypoint.sh
+    command: sleep infinity
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_HOST: db
+      DATABASE_USERNAME: todo_api_sample
+      DATABASE_PASSWORD: password
+      DATABASE_NAME: todo_api_sample_development
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: todo_api_sample
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: todo_api_sample_development
