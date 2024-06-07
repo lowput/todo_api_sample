@@ -14,7 +14,7 @@ You can access the API server to `http://localhost:3000`
 
 ### 1. Get All Tasks
 
-- **URL:** `/api/todos`
+- **URL:** `/api/v2/todos`
 - **Method:** GET
 - **Description:** Todo list
 - **Response:**
@@ -43,7 +43,7 @@ You can access the API server to `http://localhost:3000`
 
 ### 2. Create a Task
 
-- **URL:** `/api/todos`
+- **URL:** `/api/v2/todos`
 - **Method:** POST
 - **Description:** Create a new task.
 - **Request Body:**
@@ -59,7 +59,7 @@ You can access the API server to `http://localhost:3000`
 
 ### 3. Update a Task
 
-- **URL:** `/api/todos/:id`
+- **URL:** `/api/v2/todos/:id`
 - **Method:** PUT
 - **Description:** Update task.
 - **Request Body:**

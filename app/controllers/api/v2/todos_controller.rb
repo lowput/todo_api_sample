@@ -1,4 +1,4 @@
-class Api::TodosController < ApplicationController
+class Api::V2::TodosController < ApplicationController
   # GET /api/todos
   def index
     if params[:limit].present?
