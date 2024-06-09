@@ -1,5 +1,5 @@
-class NativePlatform : Platform {
-    override val name: String = "Native MacOS-64(Arm)"
+class NativePlatform: Platform {
+    override val name: String = "Native"
 }
 
 actual fun getPlatform(): Platform = NativePlatform()

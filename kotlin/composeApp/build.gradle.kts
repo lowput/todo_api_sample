@@ -7,9 +7,16 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.ktorfit)
+    alias(libs.plugins.kotlinx.serialization)
 }
 
 kotlin {
+    sourceSets.commonMain {
+        kotlin.srcDir("build/generated/ksp/metadata")
+    }
+
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
@@ -45,15 +52,28 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
             implementation(projects.shared)
+
+            // Ktorfit
+            implementation(libs.ktorfit.lib)
+            implementation(libs.ktorfit.converters.response)
+            implementation(libs.ktorfit.converters.call)
+            implementation(libs.ktorfit.converters.flow)
+            // Ktor
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.serialization.kotlinx.json)
+            // Datetime
+            implementation(libs.datetime)
+
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
         }
+        task("testClasses")
     }
 }
 
 android {
-    namespace = "jp.classi.portal.staging"
+    namespace = "jp.lowput.todo_api_sample.staging"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
@@ -61,7 +81,7 @@ android {
     sourceSets["main"].resources.srcDirs("src/commonMain/resources")
 
     defaultConfig {
-        applicationId = "jp.classi.portal.staging"
+        applicationId = "jp.lowput.todo_api_sample.staging"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
@@ -73,7 +93,12 @@ android {
         }
     }
     buildTypes {
-        getByName("release") {
+        getByName("debug") {
+            isDebuggable = true
+            isMinifyEnabled = false
+        }
+        getByName("release" ) {
+            isDebuggable = true
             isMinifyEnabled = false
         }
     }
@@ -95,8 +120,19 @@ compose.desktop {
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "jp.classi.portal.staging"
+            packageName = "jp.lowput.todo_api_sample.staging"
             packageVersion = "1.0.0"
         }
+    }
+}
+
+dependencies {
+    implementation(projects.shared)
+    add("kspCommonMainMetadata", libs.ktorfit.ksp)
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.dsl.KotlinCompile<*>>().configureEach {
+    if (name != "kspCommonMainKotlinMetadata" ) {
+        dependsOn("kspCommonMainKotlinMetadata")
     }
 }

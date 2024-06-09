@@ -23,3 +23,5 @@ services:
       POSTGRES_USER: todo_api_sample
       POSTGRES_PASSWORD: password
       POSTGRES_DB: todo_api_sample_development
+    ports:
+      - "5432:5432"

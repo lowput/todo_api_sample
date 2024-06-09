@@ -17,6 +17,7 @@ RUN apt-get update -qq && \
     pkg-config \
     curl \
     postgresql-client \
+    android-sdk \
     openjdk-17-jre && \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
@@ -44,10 +45,8 @@ RUN addgroup --gid 1000 rails && \
 
 RUN chmod +x entrypoint.sh script/wait-for-it.sh
 
-##RUN cd kotlin && ./gradlew  :server:assemble
-COPY kotlin/server/build/bin/native/releaseExecutable/server.kexe bin/server.kexe
+RUN cd kotlin && ./gradlew :server:assemble 
 COPY kotlin/server/build/libs/server-all.jar bin/server-all.jar
-RUN chmod +x bin/server.kexe
 
 # Switch to the non-root user
 USER rails

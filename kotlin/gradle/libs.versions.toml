@@ -1,5 +1,5 @@
 [versions]
-agp = "8.2.0"
+agp = "8.2.2"
 android-compileSdk = "34"
 android-minSdk = "24"
 android-targetSdk = "34"
@@ -13,8 +13,16 @@ androidx-test-junit = "1.1.5"
 compose-plugin = "1.6.10"
 junit = "4.13.2"
 kotlin = "2.0.0"
-ktor = "2.3.11"
+ktor = "2.3.10"
 logback = "1.5.6"
+ksp = "2.0.0-1.0.21"
+postgresNativeSqldelightDriver = "0.0.11"
+room = "2.7.0-alpha03"
+sqlite = "2.5.0-SNAPSHOT"
+postgresql = "42.2.12"
+jdbi3 = "3.45.1"
+ktorfit = "2.0.0-beta1"
+datetime = "0.6.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -35,6 +43,28 @@ ktor-server-cio = { module = "io.ktor:ktor-server-cio", version.ref = "ktor" }
 ktor-server-tests = { module = "io.ktor:ktor-server-tests-jvm", version.ref = "ktor" }
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+
+postgres-native-sqldelight-driver = { module = "app.softwork:postgres-native-sqldelight-driver", version.ref = "postgresNativeSqldelightDriver" }
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+room-runtime-android = { group = "androidx.room", name = "room-runtime-android", version.ref = "room" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+sqlite-bundled = { module= "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
+
+postgresql = { module= "org.postgresql:postgresql", version.ref = "postgresql" }
+jdbi3-sqlobject = { module= "org.jdbi:jdbi3-sqlobject", version.ref = "jdbi3" }
+jdbi3-kotlin = { module= "org.jdbi:jdbi3-kotlin", version.ref = "jdbi3" }
+
+ktorfit-lib = { module = "de.jensklingenberg.ktorfit:ktorfit-lib", version.ref = "ktorfit" }
+ktorfit-converters-response = { module = "de.jensklingenberg.ktorfit:ktorfit-converters-response", version.ref = "ktorfit" }
+ktorfit-converters-call = { module = "de.jensklingenberg.ktorfit:ktorfit-converters-call", version.ref = "ktorfit" }
+ktorfit-converters-flow = { module = "de.jensklingenberg.ktorfit:ktorfit-converters-flow", version.ref = "ktorfit" }
+ktorfit-ksp = { module = "de.jensklingenberg.ktorfit:ktorfit-ksp", version.ref = "ktorfit" }
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-server-content-negotiation = { module = "io.ktor:ktor-server-content-negotiation", version.ref = "ktor" }
+
+datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "datetime" }
+
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -44,3 +74,7 @@ compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "
 kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 ktor = { id = "io.ktor.plugin", version.ref = "ktor" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+room = { id = "androidx.room", version.ref = "room" }
+kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+ktorfit = { id = "de.jensklingenberg.ktorfit", version.ref = "ktorfit" }

@@ -72,3 +72,45 @@ You can access the API server to `http://localhost:3000`
     }
   }
   ```
+
+### 4. Kotlin Multi Platform
+
+- **URL:**
+  - `GET http://localhost:123456/todos/list`
+  - `GET http://localhost:123456/todos/add?content={:content}&completed={:completed}&deadline={:deadline}`
+  - `GET http://localhost:123456/todos/modify?id={:id}&content={:content}&completed={:completed}&deadline={:deadline}`
+  - `GET http://localhost:123456/todos/delete?id={:id}`
+
+- **TODO**
+  - Set up an environment kotlin-multiplatform
+  - Android,iOS,Desktop Client ...
+    - change Server IP adress to Global IP or Private Local IP.
+    - `kotlin/composeApp/src/commonMain/kotlin/Api.kt`
+      - NOT use loopback(0.0.0.0, localhost, 127.0.0.1)
+  - JVM,Native Server ...
+    - connect internal docker server, use hostname as "db" and port 5432 to connect Database.
+    - connect from outer host pc, use any IP address and port 5432 to connect Database.
+    - `kotlin/server/src/jvmMain/kotlin/jp/lowput/todo_api_sample/staging/Application.jvm.kt`
+    - `kotlin/server/src/nativeMain/kotlin/jp/lowput/todo_api_sample/staging/Application.native.kt`
+
+- **RUN:**
+  - Android: AndroidStudio -> Run
+  - iOS: AndroidStudio -> Run
+  - Desktop:
+    - Run
+      - `./gradlew :composeApp:run`
+  - Server(JVM):
+    - Build
+      - `./gradlew :server:assemble`
+    - Run/Debug
+      - AndroidStudio -> Run (Configuration: MainClass: jp.lowput.todo_api_sample.staging.Application_jvmKt)
+    - Run
+      - AndroidStudio -> Make Project
+        - `java -jar kotlin/server/build/libs/server-all.jar`
+  - Server(Native):
+    - Build
+      - `./gradlew :server:assemble`
+    - Run
+      - `bash -c ./server/build/bin/native/releaseExecutable/server.kexe`
+  - Docker: `docker-compose up -d --build`
+    - Defaults: running JVM Server

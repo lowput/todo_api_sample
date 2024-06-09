@@ -1,4 +1,4 @@
-package jp.classi.portal.staging
+package jp.lowput.todo_api_sample.staging
 
 import App
 import android.os.Bundle
